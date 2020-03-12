@@ -17,7 +17,7 @@ export default {
                 ...state,
                 likes: {
                     ...state.likes,
-                    likes: action.value.data,
+                    likes: action.value,
                     likesIsFetching: 0
                 }
             };
@@ -48,7 +48,7 @@ export default {
                 recoms: {
                     ...state.recoms,
                     recomIsFetching: 0,
-                    recommends: action.value.data
+                    recommends: action.value
                 }
             };
             case sr.fail: return {

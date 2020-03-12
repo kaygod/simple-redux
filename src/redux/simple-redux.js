@@ -83,7 +83,11 @@ export default class SimpleRedux {
       }
 
       if (feature[fun]) {
-        const new_state = feature[fun].reducer(state, action, code);
+        let _fun = feature[fun];
+        if (feature[fun].reducer) {
+          _fun = feature[fun].reducer;
+        }
+        const new_state = _fun(state, action, code);
         if (new_state) {
           return new_state;
         } else {

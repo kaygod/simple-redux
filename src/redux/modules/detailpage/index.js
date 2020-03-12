@@ -1,4 +1,6 @@
 import sr from "../../simple-redux";
+import _axios from "../../../util/_axios";
+
 
 export const nameSpace = "detailpage";
 
@@ -17,6 +19,9 @@ const data = {
   },
   nameSpace,
   feature: {
+    updateStatus(state, action) {
+      return { ...state, isFetching: action.value[0] };
+    },
     loadData: {
       async action(next) {
 
@@ -34,11 +39,11 @@ const data = {
             ...state,
             isFetching: 1
           };
-          case sr.success: return {
-            ...state,
-            isFetching: 0,
-            data: action.value.data
-          };
+          case sr.success:
+            return {
+              ...state,
+              data: action.value
+            };
           case sr.fail: return {
             ...state,
             isFetching: 0
@@ -52,7 +57,7 @@ const data = {
 }
 
 
-const result = sr.born(data);//第二个参数传入配置的axios实例
+const result = sr.born(data, _axios);//第二个参数传入配置的axios实例
 
 export default result;
 

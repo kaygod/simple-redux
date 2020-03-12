@@ -21,7 +21,11 @@ class Detailpage extends Component {
     }
 
     componentDidMount() {
-        this.props.detailAction.loadData();
+        this.props.detailAction.loadData().then(() => {
+            setTimeout(() => {
+                this.props.detailAction.updateStatus(0);//1s钟之后关闭loading框
+            }, 1000)
+        })
     }
 
 }

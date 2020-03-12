@@ -1,5 +1,6 @@
 import reducer from "./reducer";
 import sr from "../../simple-redux";
+import _axios from "../../../util/_axios";
 
 export const nameSpace = "homepage";
 
@@ -12,7 +13,8 @@ const data = {
     recoms: {
       recomIsFetching: 1,
       recommends: []
-    }
+    },
+    num: 0 //计数 测试同步操作
   },
   getters: {
     getLikes(state) {
@@ -23,10 +25,18 @@ const data = {
     },
     getLoading(state) {
       return state[nameSpace].likes.likesIsFetching;
+    },
+    getNum(state) {
+      return state[nameSpace].num;
     }
   },
   nameSpace,
   feature: {
+    countNum(state, action) {
+
+      return { ...state, num: state.num + action.value[0] };
+
+    },
     loadLikes: {
       async action(next, getState, args, dispatch) {
 
@@ -58,7 +68,7 @@ const data = {
 }
 
 
-const result = sr.born(data);//第二个参数传入配置的axios实例
+const result = sr.born(data, _axios);//第二个参数传入配置的axios实例
 
 export default result;
 

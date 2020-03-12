@@ -15,17 +15,14 @@ export default class Header extends Component {
         this.props.history.goBack();
     }
 
-    goSearchPage = () => {
-        this.props.history.push("/search");
+    syncHanlder = () => {
+        this.props.syncHanlder();
     }
 
-    login = () => {
-        this.props.history.push("/login");
-    }
 
     render() {
 
-        const { title, goBack, goSearch, login } = this.props;
+        const { title, goBack, syncHanlder } = this.props;
 
         return (
             <div className="header">
@@ -35,6 +32,9 @@ export default class Header extends Component {
                 <div className="content">
                     {title}
                 </div>
+                {
+                    syncHanlder ? (<div className="search" onClick={this.syncHanlder}>点击</div>) : null
+                }
             </div>
         );
     }
